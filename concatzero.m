@@ -1,4 +1,5 @@
 function varargout = concatzero(varargin)
+    % Append a 0 to beginning of every element in varargin
     if numel(varargin) == 1
         varargout = {strcat('0', varargin{1})};
     % vectorized version

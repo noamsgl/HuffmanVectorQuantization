@@ -25,7 +25,7 @@ while numel(queue) > 1
 
     % construct pair node
     node = struct();
-    node.edge_lower = [];  % inner nodes dont have values
+    node.lower_edge = [];  % inner nodes dont have values
     node.left = first;
     node.right = second;
     node.probability = first.probability + second.probability;
@@ -35,22 +35,3 @@ while numel(queue) > 1
 end
 codetree = queue;
 end
-
- 
-% Get length of signal
-% n = width(symbols);
-% % Initialize the PriorityQueue
-% prob_queue = probabilities;  
-% symbol_queue = symbols;  
-% 
-
-% Iterate over queue
-% while length(prob_queue) > 1
-%     [prob_queue, indices] = sort(prob_queue, 'ascending');
-%     symbol_queue = symbol_queue(indices)
-%     first_prob = prob_queue(1);
-%     second_prob = prob_queue(2);
-%     first_symbol = symbol_queue(1);
-%     second_symbol = symbol_queue(2);
-% end
-% codebook = 5

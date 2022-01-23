@@ -1,4 +1,5 @@
 function varargout = concatone(varargin)
+    % Append a 1 to beginning of every element in varargin
     if numel(varargin) == 1
         varargout = {strcat('1', varargin{1})};
     % vectorized version

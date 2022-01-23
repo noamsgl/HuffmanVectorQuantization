@@ -1,6 +1,7 @@
 function codebook = tree2book(root)
+    % Parse a binary tree representing a huffman codebook
     if (isequal(root.left, []) && isequal(root.right, []))
-       codebook = struct('lower_edge', root.edge_lower, 'code', '0');
+       codebook = struct('lower_edge', root.lower_edge, 'code', '0');
        return
     end
     if (isequal(root.left, []))
