@@ -1,6 +1,6 @@
 function varargout = concatzero(varargin)
     if numel(varargin) == 1
-        varargout = strcat('0', varargin);
+        varargout = {strcat('0', varargin{1})};
     % vectorized version
     else
         for i = 1:length(varargin)

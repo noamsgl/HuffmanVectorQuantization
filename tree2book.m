@@ -16,8 +16,12 @@ function codebook = tree2book(root)
     rcodebook = tree2book(root.right);
     
     % append 0 and 1 to codewords
-    lcodebook.code = concatzero(lcodebook.code);
-    rcodebook.code = concatone(rcodebook.code);
+    lcode = {lcodebook.code};
+    rcode = {rcodebook.code};
+    new_lcode = concatzero(lcode);
+    [lcodebook.code] = new_lcode{:};
+    new_rcode = concatone(rcode);
+    [rcodebook.code] = new_rcode{:};
     
     % concat structs
     codebook = [lcodebook; rcodebook];
