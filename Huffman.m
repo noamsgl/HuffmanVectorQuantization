@@ -1,4 +1,4 @@
-function codebook = Huffman(probabilities_table)
+function codetree = Huffman(probabilities_table)
 %Huffman coding
 %   accepts a table with variables "edge_lower" and "probability"
 %   return a Huffman codebook
@@ -20,23 +20,20 @@ end
 
 % Build Huffman codebook as tree
 while numel(queue) > 1
-    queue = sort_by_probability(queue);
-    % get two smallest probabilities
-    least_freq = queue(1:2);
-    % remove them from queue
-    queue = queue(3:end);
-    
+    % pop two smallest probability structs from queue
+    [first, second, queue] = get_two_least_prob(queue);
+
     % construct pair node
     node = struct();
     node.edge_lower = [];  % inner nodes dont have values
-    node.left = least_freq(1);
-    node.right = least_freq(2);
-    node.probability = least_freq(1).probability + least_freq(2).probability;
+    node.left = first;
+    node.right = second;
+    node.probability = first.probability + second.probability;
     
     %append node to queue
     queue = [queue node];
 end
-codebook = queue;
+codetree = queue;
 end
 
  

@@ -1,7 +1,8 @@
-function sorted_vec = sort_by_probability(vec)
-% Sort a vector of structs on 'probability' using selection sort
-% Implemented with help from https://www.corsi.univr.it/documenti/OccorrenzaIns/matdid/matdid380839.pdf
+function [first, second, rest] = get_two_least_freq(vec)
+% Gets a vector of structs with 'probability'
+% Returns the first and second least frequent, and the rest untouched.
 
+% get first least frequent
 for i = 1:length(vec) - 1
     indlow = i;
     for j = i + 1:length(vec)

@@ -40,4 +40,6 @@ fprintf("1.2 The entropy of the signal is: %f\n", entropy)
 probabilities_table = table(edges(1:end-1)', probabilities', 'VariableNames', {'edge_lower', 'probability'});
 summary(probabilities_table)
 
-codebook = Huffman(probabilities_table);
+codetree = Huffman(probabilities_table);
+
+codebook = tree2book(codetree);
