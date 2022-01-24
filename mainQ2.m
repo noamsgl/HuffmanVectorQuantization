@@ -143,8 +143,8 @@ yyaxis right
 plot(Bs, MXDs, '-^')
 ylabel("MXD")
 xlabel("bits per sample")
-title("2.4 Distortion Measures as function of Bit Rate")
-print(gcf,'results/2.4distortionsQ.png','-dpng','-r300');
+title("2.5 Distortion Measures as function of Bit Rate")
+print(gcf,'results/2.5distortionsQ.png','-dpng','-r300');
 
 %% Question 2.6
 fprintf("2.6\n")
