@@ -7,7 +7,7 @@ clear
 clc
 
 %% Initialize parameters
-Q = 2^4;  % num_levels, [2^2, ..., 2^10]
+Q = 2^7;  % num_levels, [2^2, ..., 2^10]
 N = 2;  % num_samples in each group, [1, 2, 3]
 
 %% Load data
@@ -24,9 +24,14 @@ data = reshape(data, [1, n_channels * n_samples]);
 
 codebook = trainVQ(data, Q, N);
 reshaped_data = reshape(data.', N, []).';
-scatter(reshaped_data(:,1), reshaped_data(:,2))
-scatter(codebook(:,1), codebook(:,2))
-title("2.2")
+scatter(reshaped_data(:,1), reshaped_data(:,2), 1, [0.5, 0.5, 0.5])
+hold on
+scatter(codebook(:,1), codebook(:,2), 'r')
+h = voronoi(double(codebook(:,1)), double(codebook(:,2)));
+for i=1:length(h)
+    h(i).LineWidth = 1.2;
+end
+title("2.2 Voronoi Regions for Vector Quantization")
 
 
 fprintf("success\n")
