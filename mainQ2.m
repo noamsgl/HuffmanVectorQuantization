@@ -22,6 +22,7 @@ load('data.mat');
 data = quantize(data, 2^12);
 
 %% 2.2a Train Vector Quantization Codebook
+print("2.2a")
 % Initialize block size
 N = 2;
 % Initialize quantization level
@@ -45,6 +46,7 @@ hold off
 print(gcf,'results/2.2.a.voronoi.png','-dpng','-r300'); 
 
 %% 2.2b Train Vector Quantization Codebook
+print("2.2b")
 % Initialize block size
 N = 2;
 % Initialize quantization level
@@ -68,6 +70,7 @@ hold off
 print(gcf,'results/2.2.b.voronoi.png','-dpng','-r300'); 
 
 %% Question 2.4
+print("2.4")
 % Initialize block size
 N = 2;
 % Build quantization levels (i.e. [4, 8, 16, 32, ..., 512, 1024])
@@ -98,6 +101,7 @@ title("2.4 Distortion Measure as function of Bit Rate")
 print(gcf,'results/2.4distortionsQ.png','-dpng','-r300'); 
 
 %% Question 2.5
+print("2.5")
 % Initialize quantization levels
 Q = 128;
 % Initialize block sizes
@@ -129,6 +133,7 @@ title("2.5 Distortion Measure as function of Bit Rate")
 print(gcf,'results/2.5distortionsN.png','-dpng','-r300'); 
 
 %% Question 2.6
+print("2.6")
 tiledlayout(3,1)
 %Top Plot
 ax1 = nexttile;
@@ -161,6 +166,7 @@ plotEEG_to_ax(ax3, reconstructed, 512, sprintf("reconstructed Q=%d, N=%d", Q, N)
 print(gcf,'results/2.6Comparison.png','-dpng','-r300'); 
 
 %% Question 2.7
+print("2.7")
 tiledlayout(3,1)
 %Top Plot
 ax1 = nexttile;

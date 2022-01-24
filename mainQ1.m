@@ -1,13 +1,10 @@
 %% Question 1.1
 % Noam Siegel
 % January 24, 2022
+print("1.1")
 
 %% Make results directory
 mkdir('results')
-
-%% Turn off kmeans warning
-% turning this off because we are not seeking convergence
-warning('off', 'stats:kmeans:FailedToConverge')
 
 %% Load data
 close all
@@ -40,11 +37,13 @@ probabilities = N/sum(N);
 save('results/1.1probabilities.mat','probabilities')
 
 %% Question 1.2
+print("1.2")
 % Calculate signal entropy
 entropy = -sum(probabilities(probabilities~=0) .* log2(probabilities(probabilities~=0)));
 fprintf("1.2 The entropy of the signal is: %f\n", entropy) 
 
 %% Question 1.3
+print("1.3")
 % Initialize probabilities table
 probabilities_table = table(edges(1:end-1)', probabilities', 'VariableNames', {'lower_edge', 'probability'});
 
@@ -74,6 +73,7 @@ title('1.3 Huffman Code Lengths')
 print(gcf,'results/1.3huffmanlengths.png','-dpng','-r300'); 
 
 %% Question 1.4
+print("1.4")
 % Calculate Huffman Encoded Signal Bitsize
 % Sort by amplitude (lower_edge)
 codebook_table = struct2table(codebook);
