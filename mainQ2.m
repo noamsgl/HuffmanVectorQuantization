@@ -41,7 +41,7 @@ h = voronoi(double(codebook(:,1)), double(codebook(:,2)));
 for i=1:length(h)
     h(i).LineWidth = 1.2;
 end
-title("2.2 Voronoi Regions for Vector Quantization")
+title("2.2a Voronoi Regions for Vector Quantization")
 hold off
 print(gcf,'results/2.2.a.voronoi.png','-dpng','-r300'); 
 
@@ -65,12 +65,13 @@ h = voronoi(double(codebook(:,1)), double(codebook(:,2)));
 for i=1:length(h)
     h(i).LineWidth = 1.2;
 end
-title("2.2 Voronoi Regions for Vector Quantization")
+title("2.2b Voronoi Regions for Vector Quantization")
 hold off
 print(gcf,'results/2.2.b.voronoi.png','-dpng','-r300'); 
 
 %% Question 2.4
 fprintf("2.4\n")
+clf
 % Initialize block size
 N = 2;
 % Build quantization levels (i.e. [4, 8, 16, 32, ..., 512, 1024])
@@ -109,13 +110,14 @@ print(gcf,'results/2.4distortionsQ.png','-dpng','-r300');
 
 %% Question 2.5
 fprintf("2.5\n")
+clf
 % Initialize quantization levels
 Q = 128;
 % Initialize block sizes
-Ns = [1 2 3];
+Ns = [3 2 1];
 % Initialize distortion measures arrays
-PRDs = zeros(size(Qs));
-MXDs = zeros(size(Qs));
+PRDs = zeros(size(Ns));
+MXDs = zeros(size(Ns));
 % Calculate distortion measure for each block size
 for i=1:length(Ns)
     % Get block size
@@ -131,7 +133,7 @@ for i=1:length(Ns)
     % Insert distortion measure into Ds
     PRDs(i) = prd;
     MXDs(i) = mxd;
-    fprintf("Q is %d, PRD is %f, MXD is %f\n", Q, prd, mxd)
+    fprintf("N is %d, PRD is %f, MXD is %f\n", N, prd, mxd)
 end
 
 % Calculate Bit Rates (bits per sample)
