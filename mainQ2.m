@@ -22,7 +22,7 @@ load('data.mat');
 data = quantize(data, 2^12);
 
 %% 2.2a Train Vector Quantization Codebook
-print("2.2a")
+fprintf("2.2a\n")
 % Initialize block size
 N = 2;
 % Initialize quantization level
@@ -46,7 +46,7 @@ hold off
 print(gcf,'results/2.2.a.voronoi.png','-dpng','-r300'); 
 
 %% 2.2b Train Vector Quantization Codebook
-print("2.2b")
+fprintf("2.2b\n")
 % Initialize block size
 N = 2;
 % Initialize quantization level
@@ -70,13 +70,14 @@ hold off
 print(gcf,'results/2.2.b.voronoi.png','-dpng','-r300'); 
 
 %% Question 2.4
-print("2.4")
+fprintf("2.4\n")
 % Initialize block size
 N = 2;
 % Build quantization levels (i.e. [4, 8, 16, 32, ..., 512, 1024])
 Qs = arrayfun(@pow2, 2:10);
-% Initialize distortion measures array
-Ds = zeros(size(Qs));
+% Initialize distortion measures arrays
+PRDs = zeros(size(Qs));
+MXDs = zeros(size(Qs));
 % Calculate distortion measure for each quantization level
 for i=1:length(Qs)
     % Get quantization level
@@ -85,29 +86,36 @@ for i=1:length(Qs)
     cropped_data = crop(data, N);
     % Encode and Decode data
     reconstructed = VQEncodeDecode(cropped_data, Q, N);
-    % Measure distortion measure
-    distortion = PRD(cropped_data, reconstructed);
+    % Measure PRD distortion
+    prd = PRD(cropped_data, reconstructed);
+    % Measure pairwise max-cross-correlation distortion
+    mxd = maxxcorrDistortion(cropped_data, reconstructed);
     % Insert distortion measure into Ds
-    Ds(i) = distortion;
-    fprintf("Q is %d, PRD distortion is %f\n", Q, distortion)
+    PRDs(i) = prd;
+    MXDs(i) = mxd;
+    fprintf("Q is %d, PRD is %f, MXD is %f\n", Q, prd, mxd)
 end
 % Calculate Bit Rates (bits per sample)
 Bs = arrayfun(@(Q) log2(Q)/N, Qs);
-% Plot Distortion Measure as function of Bit Rate (bits per sample)
-plot(Bs, Ds, '-o')
+% Plot Distortion Measures as function of Bit Rate (bits per sample)
+plot(Bs, PRDs, '-o')
 ylabel("PRD")
+yyaxis right
+plot(Bs, MXDs, '-^')
+ylabel("MXD")
 xlabel("bits per sample")
-title("2.4 Distortion Measure as function of Bit Rate")
-print(gcf,'results/2.4distortionsQ.png','-dpng','-r300'); 
+title("2.4 Distortion Measures as function of Bit Rate")
+print(gcf,'results/2.4distortionsQ.png','-dpng','-r300');
 
 %% Question 2.5
-print("2.5")
+fprintf("2.5\n")
 % Initialize quantization levels
 Q = 128;
 % Initialize block sizes
 Ns = [1 2 3];
-% Initialize distortion measures array
-Ds = zeros(size(Ns));
+% Initialize distortion measures arrays
+PRDs = zeros(size(Qs));
+MXDs = zeros(size(Qs));
 % Calculate distortion measure for each block size
 for i=1:length(Ns)
     % Get block size
@@ -116,24 +124,30 @@ for i=1:length(Ns)
     cropped_data = crop(data, N);
     % Encode and Decode data
     reconstructed = VQEncodeDecode(cropped_data, Q, N);
-    % Measure distortion measure
-    distortion = PRD(cropped_data, reconstructed);
+    % Measure PRD distortion
+    prd = PRD(cropped_data, reconstructed);
+    % Measure pairwise max-cross-correlation distortion
+    mxd = maxxcorrDistortion(cropped_data, reconstructed);
     % Insert distortion measure into Ds
-    Ds(i) = distortion;
-    fprintf("N is %d, PRD distortion is %f\n", N, distortion)
+    PRDs(i) = prd;
+    MXDs(i) = mxd;
+    fprintf("Q is %d, PRD is %f, MXD is %f\n", Q, prd, mxd)
 end
 
 % Calculate Bit Rates (bits per sample)
 Bs = arrayfun(@(N) log2(Q)/N, Ns);
-% Plot Distortion Measure as function of Bit Rate (bits per sample)
-plot(Bs, Ds, '-o')
+% Plot Distortion Measures as function of Bit Rate (bits per sample)
+plot(Bs, PRDs, '-o')
 ylabel("PRD")
+yyaxis right
+plot(Bs, MXDs, '-^')
+ylabel("MXD")
 xlabel("bits per sample")
-title("2.5 Distortion Measure as function of Bit Rate")
-print(gcf,'results/2.5distortionsN.png','-dpng','-r300'); 
+title("2.4 Distortion Measures as function of Bit Rate")
+print(gcf,'results/2.4distortionsQ.png','-dpng','-r300');
 
 %% Question 2.6
-print("2.6")
+fprintf("2.6\n")
 tiledlayout(3,1)
 %Top Plot
 ax1 = nexttile;
@@ -166,7 +180,7 @@ plotEEG_to_ax(ax3, reconstructed, 512, sprintf("reconstructed Q=%d, N=%d", Q, N)
 print(gcf,'results/2.6Comparison.png','-dpng','-r300'); 
 
 %% Question 2.7
-print("2.7")
+fprintf("2.7\n")
 tiledlayout(3,1)
 %Top Plot
 ax1 = nexttile;

@@ -1,4 +1,8 @@
+% plotEEG_to_ax.m
+% Noam Siegel
+% January 24, 2022
 function handle = plotEEG_to_ax(ax, data, sfreq, title_str)
+% Plot zscored EEG data to the given axis
 % Initialize params
 n_samples = width(data);
 n_channels = height(data);
