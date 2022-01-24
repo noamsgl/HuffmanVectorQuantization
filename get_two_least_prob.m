@@ -1,3 +1,6 @@
+% get_two_least_prob.m
+% Noam Siegel
+% January 24, 2022
 function [first, second, rest] = get_two_least_prob(vec)
 % Gets a vector of structs with 'probability'
 % Returns the first and second least probable, and the rest untouched.

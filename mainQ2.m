@@ -1,5 +1,7 @@
 
 %% Question 2.1
+% Noam Siegel
+% January 24, 2022
 
 %% Clear environment
 close all
@@ -20,9 +22,10 @@ n_channels = height(data);
 n_samples = width(data);
 data = reshape(data, [1, n_channels * n_samples]);
 
-%% Train Vector Quantization Codebook
-
+%% 2.2 Train Vector Quantization Codebook
+% get VQ codebook
 codebook = trainVQ(data, Q, N);
+% plot VQ voronoi diagram
 reshaped_data = reshape(data.', N, []).';
 scatter(reshaped_data(:,1), reshaped_data(:,2), 1, [0.5, 0.5, 0.5])
 hold on
@@ -33,8 +36,10 @@ for i=1:length(h)
 end
 title("2.2 Voronoi Regions for Vector Quantization")
 
+%% Question 2.4
+N = 2;
+for i=2:10
+    Q = 2^i;
+    
 
 fprintf("success\n")
-
-
-

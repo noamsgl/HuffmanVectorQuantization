@@ -1,9 +1,6 @@
-
-% Noam Siegel
-% Physiological Signal Processing
-% Final Exam Part 2 - Compression
-
 %% Question 1.1
+% Noam Siegel
+% January 24, 2022
 
 %% Load data
 close all

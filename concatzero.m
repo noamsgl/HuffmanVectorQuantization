@@ -1,3 +1,6 @@
+% concatzero.m
+% Noam Siegel
+% January 24, 2022
 function varargout = concatzero(varargin)
     % Append a 0 to beginning of every element in varargin
     if numel(varargin) == 1

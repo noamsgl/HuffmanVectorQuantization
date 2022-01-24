@@ -1,3 +1,6 @@
+% PRD.m
+% Noam Siegel
+% January 24, 2022
 function prd = PRD(original,reconstructed)
 % percentage root-mean-square difference (PRD)
 % as requested in question 2.3 1)

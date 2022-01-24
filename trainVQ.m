@@ -1,3 +1,6 @@
+% trainVQ.m
+% Noam Siegel
+% January 24, 2022
 function C = trainVQ(data, Q, N)
 % calculate VQ codebook (mapping from code words to 
 % Q is number of quantization levels

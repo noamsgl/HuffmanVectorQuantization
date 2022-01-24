@@ -1,3 +1,6 @@
+% tree2book.m
+% Noam Siegel
+% January 24, 2022
 function codebook = tree2book(root)
     % Parse a binary tree representing a huffman codebook
     if (isequal(root.left, []) && isequal(root.right, []))

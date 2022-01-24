@@ -1,3 +1,6 @@
+% Huffman.m
+% Noam Siegel
+% January 24, 2022
 function codetree = Huffman(probabilities_table)
 %Huffman coding
 %   accepts a table with variables "edge_lower" and "probability"

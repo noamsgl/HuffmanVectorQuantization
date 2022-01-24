@@ -1,3 +1,6 @@
+% concatone.m
+% Noam Siegel
+% January 24, 2022
 function varargout = concatone(varargin)
     % Append a 1 to beginning of every element in varargin
     if numel(varargin) == 1
