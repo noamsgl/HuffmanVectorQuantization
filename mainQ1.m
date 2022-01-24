@@ -75,3 +75,6 @@ codebook_table = sortrows(codebook_table, 'lower_edge');
 average_length = sum((N' .* codebook_table.code_length))/sum(N);
 fprintf("1.4 The average Huffman encoded word length is: %f\n", average_length) 
 
+%% End message
+fprintf("success\n")
+
