@@ -19,7 +19,6 @@ data = reshape(data, [1, n_channels * n_samples]);
 % Quantize into 2^12 levels (12 bits)
 num_levels = 2^12;
 edges = min(data):(max(data)-min(data))/(num_levels):max(data);
-data = data * 1000;
 [N, edges] = histcounts(data, edges);
 fprintf("1.1 The average bitsize per sample: %f\n", log2(num_levels)) 
 
@@ -27,10 +26,11 @@ fprintf("1.1 The average bitsize per sample: %f\n", log2(num_levels))
 figure('Name', '1.1 Amplitude Histogram')
 plot(edges(1:end-1), N)
 title('1.1 distribution of signal amplitude')
+print(gcf,'results/1.1signalhistogram.png','-dpng','-r300'); 
 
 %% Save empiriccal amplitude probabilities
 probabilities = N/sum(N);
-save('1.1probabilities.mat','probabilities')
+save('results/1.1probabilities.mat','probabilities')
 
 %% Question 1.2
 % Calculate signal entropy
@@ -51,7 +51,7 @@ codetree = Huffman(probabilities_table);
 codebook = tree2book(codetree);
 
 % Save codebook to file
-writetable(struct2table(codebook), 'codebook.csv')
+writetable(struct2table(codebook), 'results/1.3huffmancodebook.csv')
 
 % Plot code length as function of bin edge
 figure('Name', '1.3 Huffman Code Word Lengths')
@@ -64,6 +64,7 @@ scatter([codebook.lower_edge], [codebook.code_length], '^', 'r')
 xlabel('Signal Amplitude (mV)');
 ylabel('Code Word Length (bits)');
 title('1.3 Huffman Code Lengths')
+print(gcf,'results/1.3huffmanlengths.png','-dpng','-r300'); 
 
 %% Question 1.4
 % Calculate Huffman Encoded Signal Bitsize
