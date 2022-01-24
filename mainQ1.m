@@ -2,6 +2,13 @@
 % Noam Siegel
 % January 24, 2022
 
+%% Make results directory
+mkdir('results')
+
+%% Turn off kmeans warning
+% turning this off because we are not seeking convergence
+warning('off', 'stats:kmeans:FailedToConverge')
+
 %% Load data
 close all
 clear

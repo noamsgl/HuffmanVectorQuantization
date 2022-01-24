@@ -3,6 +3,13 @@
 % Noam Siegel
 % January 24, 2022
 
+%% Make results directory
+mkdir('results')
+
+%% Turn off kmeans warning
+% turning this off is allowed because we are not seeking kmeans convergence
+warning('off', 'stats:kmeans:FailedToConverge')
+
 %% Clear environment
 close all
 clear
@@ -125,6 +132,7 @@ print(gcf,'results/2.5distortionsN.png','-dpng','-r300');
 tiledlayout(3,1)
 %Top Plot
 ax1 = nexttile;
+% Plot original data
 plotEEG_to_ax(ax1, data, 512, "original zscored EEG");
 
 %Middle plot
@@ -136,7 +144,7 @@ Q = 2^4;
 cropped_data = crop(data, N);
 % Encode and Decode data
 reconstructed = VQEncodeDecode(cropped_data, Q, N);
-% Plot Reconstructed Version
+% Plot reconstructed data
 plotEEG_to_ax(ax2, reconstructed, 512, sprintf("reconstructed Q=%d, N=%d", Q, N));
 
 %Bottom plot
@@ -148,7 +156,7 @@ Q = 2^7;
 cropped_data = crop(data, N);
 % Encode and Decode data
 reconstructed = VQEncodeDecode(cropped_data, Q, N);
-% Plot Reconstructed Version
+% Plot reconstructed data
 plotEEG_to_ax(ax3, reconstructed, 512, sprintf("reconstructed Q=%d, N=%d", Q, N));
 print(gcf,'results/2.6Comparison.png','-dpng','-r300'); 
 
@@ -156,6 +164,7 @@ print(gcf,'results/2.6Comparison.png','-dpng','-r300');
 tiledlayout(3,1)
 %Top Plot
 ax1 = nexttile;
+% Plot original data
 plotEEG_to_ax(ax1, data, 512, "original zscored EEG");
 
 %Middle plot
@@ -167,7 +176,7 @@ Q = 2^7;
 cropped_data = crop(data, N);
 % Encode and Decode data
 reconstructed = VQEncodeDecode(cropped_data, Q, N);
-% Plot Reconstructed Version
+% Plot reconstructed data
 plotEEG_to_ax(ax2, reconstructed, 512, sprintf("reconstructed Q=%d, N=%d", Q, N));
 
 %Bottom plot
@@ -179,7 +188,7 @@ Q = 2^7;
 cropped_data = crop(data, N);
 % Encode and Decode data
 reconstructed = VQEncodeDecode(cropped_data, Q, N);
-% Plot Reconstructed Version
+% Plot reconstructed data
 plotEEG_to_ax(ax3, reconstructed, 512, sprintf("reconstructed Q=%d, N=%d", Q, N));
 print(gcf,'results/2.7Comparison.png','-dpng','-r300'); 
 
