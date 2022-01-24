@@ -8,6 +8,6 @@ function flat_data = crop_and_flatten(data, N)
 data = data(:,1:end - mod(width(data), N));
 n_channels = height(data);
 n_samples = width(data);
-flat_data = reshape(data, [1, n_channels * n_samples]);
+flat_data = reshape(data.', n_channels * n_samples, []).';
 
 end
