@@ -107,5 +107,38 @@ ylabel("PRD")
 xlabel("bits per sample")
 title("2.5 Distortion Measure as function of Bit Rate")
 
+%% Question 2.6
+tiledlayout(2,1)
+%Top Plot
+ax1 = nexttile;
+plotEEG_to_ax(ax1, data, 512, "original zscored EEG")
+
+%Middle plot
+ax2 = nexttile;
+% Set VQ compression parameters
+N = 1;
+Q = 2^12;
+% crop and flatten data
+flat_data = crop_and_flatten(data, N);
+% reshape data into blocks of size N
+blocked_data = reshape(flat_data.', N, []).';
+% Generate codebook
+codebook = trainVQ(flat_data, Q, N);
+% Encode signal
+encoded = VQencode(blocked_data, codebook);
+% Reconstruct signal
+blocked_reconstructed = VQdecode(encoded, codebook);
+% Reshape to original shape
+reconstructed = reshape(blocked_reconstructed.', [], 32).';
+% Plot Reconstructed Version
+plotEEG_to_ax(ax2, reconstructed, 512, "reconstructed Q=512, N=1")
+
+%Bottom plot
+%ax3 = nexttile;
+
+%plotEEG_to_ax(ax2, reconstructed, 512, "reconstructed Q=128, N=2")
+
+%% Question 2.7
+
 %% End message
 fprintf("success\n")
